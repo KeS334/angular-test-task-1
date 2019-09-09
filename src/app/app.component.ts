@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpService} from './http.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-test-task';
+  date: Array <object>;
+  constructor(svc: HttpService) {
+    svc.getResponse().subscribe(response => {
+          console.log(response);
+          this.date = response.products;
+        }, (error) => {
+          console.log(error);
+        });
+  }
 }
